@@ -13,6 +13,13 @@ Grill.init(
             primaryKey: true,
             autoIncrement: true
         },
+        grill_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        owner_id: {
+            type: DataTypes.INTEGER,
+        }
     },
     {
         sequelize

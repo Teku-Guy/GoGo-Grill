@@ -13,6 +13,22 @@ User.init(
             primaryKey: true,
             autoIncrement: true
           },
+          first_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+          },
+          last_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+          },
+          age: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+          },
+          gender:{
+            type: DataTypes.STRING,
+            allowNull: false
+          },
           username: {
             type: DataTypes.STRING,
             allowNull: false
@@ -29,8 +45,11 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-              len: [4]
+              len: [6]
             }
+          },
+          grill_id: {
+            type: DataTypes.INTEGER,
           }
     },
     {
