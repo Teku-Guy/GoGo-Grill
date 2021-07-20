@@ -23,3 +23,5 @@ Size.init(
         timestamps: false
     }
 );
+
+module.exports = Size;

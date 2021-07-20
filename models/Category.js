@@ -23,3 +23,5 @@ Category.init(
         timestamps: false,
     }
 );
+
+module.exports = Category;

@@ -23,3 +23,5 @@ Brand.init(
         timestamps: false,
     }
 );
+
+module.exports = Brand;

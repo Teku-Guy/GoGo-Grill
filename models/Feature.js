@@ -23,3 +23,5 @@ Feature.init(
         timestamps: false,
     }
 );
+
+module.exports = Feature;

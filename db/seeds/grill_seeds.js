@@ -2,7 +2,10 @@ const { Grill } = require('../../models');
 
 const grillData = [
     {
-        grill_type: 'test',
+        category: '1',
+        size: '1',
+        brand:'1',
+        feature: '1',
         owner_id: '1'
     }
 ]
