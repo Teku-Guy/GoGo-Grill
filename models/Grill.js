@@ -17,8 +17,17 @@ Grill.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        size: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        brand: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         owner_id: {
             type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {
