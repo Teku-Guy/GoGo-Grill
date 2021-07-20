@@ -13,8 +13,8 @@ Grill.init(
             primaryKey: true,
             autoIncrement: true
         },
-        grill_type: {
-            type: DataTypes.STRING,
+        category: {
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         size: {
@@ -22,16 +22,18 @@ Grill.init(
             allowNull: false
         },
         brand: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
+        feature: DataTypes.INTEGER,
         owner_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
     },
     {
-        sequelize
+        sequelize,
+        timestamps: false,
     }
 );
 
