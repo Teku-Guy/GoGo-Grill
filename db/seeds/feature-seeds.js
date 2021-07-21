@@ -15,6 +15,6 @@ const featureData = [
     },
 ];
 
-const seedFeatures = () => Feature.bulkCreate(tagData);
+const seedFeatures = () => Feature.bulkCreate(featureData);
 
 module.exports = seedFeatures;

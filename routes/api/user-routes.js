@@ -4,7 +4,7 @@ const { User, Grill }  = require('../../models');
 //get all users
 router.get('/', (req, res) => {
     User.findAll({
-        include: [Grill]
+        // include: [Grill]
     })
     .then(userData => res.json(userData))
     .catch(err => {
@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
-    });;
+    });
 });
 
 //Update User Info
