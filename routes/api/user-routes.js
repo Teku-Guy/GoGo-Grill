@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { User, Grill }  = require('../../models');
 
+//The `api/users/` endpoint
+
 //get all users
 router.get('/', (req, res) => {
     User.findAll({
