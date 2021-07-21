@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
-class Feature extends Model {}
+class FeatureTag extends Model {}
 
-Feature.init(
+FeatureTag.init(
     {
         //define Columns
         id: {
@@ -13,14 +13,9 @@ Feature.init(
             primaryKey: true,
             autoIncrement: true
         },
-        //refrences id from FeatureTag table
-        tag_id: {
+        //feature-tag name
+        feature_name: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        //refrences id from grill table
-        grill_id: {
-            type: DataTypes.INTEGER,
             allowNull: false
         }
     },
@@ -30,4 +25,4 @@ Feature.init(
     }
 );
 
-module.exports = Feature;
+module.exports = FeatureTag;

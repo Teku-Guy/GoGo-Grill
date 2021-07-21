@@ -1,6 +1,11 @@
 //import data to seed
 const seedUsers = require('./user-seeds');
 const seedGrills = require('./grill_seeds');
+const seedBrands = require('./brand-seeds');
+const seedCategories = require('./category-seeds');
+const seedFeatureTags = require('./feature-tag-seeds');
+const seedFeatures = require('./feature-seeds');
+
 const sequelize = require('../../config/connection');
 
 const seedAll = async () => {
@@ -10,6 +15,14 @@ const seedAll = async () => {
     console.log('\n----- USERS SEEDED -----\n');
     await seedGrills();
     console.log('\n----- GRILLS SEEDED -----\n');
+    await seedBrands();
+    console.log('\n----- BRANDS SEEDED -----\n');
+    await seedCategories();
+    console.log('\n----- CATEGORIES SEEDED -----\n');
+    await seedFeatureTags();
+    console.log('\n----- FEATURE_TAGS SEEDED -----\n');
+    await seedFeatures();
+    console.log('\n----- FEATURES SEEDED -----\n');
 
     process.exit(0);
   };
