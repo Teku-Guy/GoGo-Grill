@@ -4,7 +4,7 @@ const { Appointment }  = require('../../models');
 
 //The `api/appts/` endpoint
 
-//get all Appt
+//get all Appt and associated grill and user information
 router.get('/', (req, res) => {
     Appointment.findAll()
     .then(apptData => res.json(apptData))

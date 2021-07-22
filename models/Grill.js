@@ -13,22 +13,22 @@ Grill.init(
             primaryKey: true,
             autoIncrement: true
         },
-        category: {
+        category_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        size: {
+        size_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        brand: {
+        brand_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        feature: DataTypes.INTEGER,
         owner_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            unique: false
         }
     },
     {
