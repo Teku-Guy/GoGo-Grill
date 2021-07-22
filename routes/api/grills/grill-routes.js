@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { Grill, Category, Size, Brand, User }  = require('../../../models');
+const { Grill, Category, Size, Brand, User, FeatureTag }  = require('../../../models');
 
 //The `api/grills/` endpoint
 
 //get all grills and related data
 router.get('/', (req, res) => {
     Grill.findAll({
-        include: [Category, Size, Brand, User]
+        include: [Brand, Category, Size, FeatureTag, User]
     })
     .then(grillData => res.json(grillData))
     .catch(err => {

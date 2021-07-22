@@ -45,6 +45,8 @@ Brand.hasOne(Grill, {
    foreignKey: 'brand_id'
 });
 
+/***** set up the one-to-many relationships between Grill and FeatureTag, and Feature and FeatureTag respectively *****/
+
 //Grill Can have many feature tags
 Grill.belongsToMany(FeatureTag, {
    through: Feature,

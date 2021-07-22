@@ -1,12 +1,35 @@
 const router = require('express').Router();
-const { User, Grill }  = require('../../models');
+const { User, Grill, Brand, Category, Size, FeatureTag }  = require('../../models');
 
 //The `api/users/` endpoint
 
 //get all users
 router.get('/', (req, res) => {
     User.findAll({
-        include: [Grill]
+        include: [
+            {
+                model: Grill,
+                attributes: ['id', 'owner_id'],
+                include: [
+                    {
+                        model: Brand,
+                        attributes: ['brand_name']
+                    },
+                    {
+                        model: Category,
+                        attributes: ['category_name']
+                    },
+                    {
+                        model: Size,
+                        attributes: ['dimensions']
+                    },
+                    {
+                        model: FeatureTag,
+                        attributes: ['feature_name']
+                    }
+                ]
+            }
+        ]
     })
     .then(userData => res.json(userData))
     .catch(err => {
