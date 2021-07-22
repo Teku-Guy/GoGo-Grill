@@ -35,4 +35,51 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+    Grill.create(req.body)
+    .then(grillData => res.status(200).json(grillData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+});
+
+router.put('/:id', (req, res) => {
+    Grill.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(grillData => {
+        if(!grillData){
+            res.status(404).json({ message: 'No GRILL found with this id'});
+            return;
+        }
+        res.json(grillData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.delete('/:id', (req, res) => {
+    Grill.destroy({
+        where: {
+            id: req.params.id
+        }
+      })
+        .then(userData => {
+            if (!userData) {
+                res.status(404).json({ message: 'No USER found with this id' });
+                return;
+            }
+            res.status(200).json(userData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+})
+
 module.exports = router;
