@@ -3,7 +3,7 @@ const { Grill }  = require('../../../models');
 
 //The `api/grills/` endpoint
 
-//get all grills
+//get all grills and related data
 router.get('/', (req, res) => {
     Grill.findAll()
     .then(grillData => res.json(grillData))
