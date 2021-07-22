@@ -43,9 +43,6 @@ User.init(
             validate: {
               len: [6]
             }
-          },
-          grill_id: {
-            type: DataTypes.INTEGER,
           }
     },
     {

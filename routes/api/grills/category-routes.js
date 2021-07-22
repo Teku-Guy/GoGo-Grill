@@ -1,35 +1,30 @@
 const router = require('express').Router();
-const { User, Grill }  = require('../../models');
+const { Category, User }  = require('../../../models');
 
-//The `api/users/` endpoint
+// the `/api/grills/categories` endpoint
 
-//get all users
 router.get('/', (req, res) => {
-    User.findAll({
-        include: [Grill]
-    })
-    .then(userData => res.json(userData))
+    Category.findAll({})
+    .then(categoryData => res.json(categoryData))
     .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+        console.log(err);
+        res.status(500).json(err);
+      });
 });
 
-//get a single user by id
 router.get('/:id', (req, res) => {
-    User.findOne({
+    Category.findOne({
         where:{
             id: req.params.id
         }
     })
-    .then(userData => {
-        if(!userData){
+    .then(categoryData => {
+        if(!categoryData){
             //if ID does not exist return this message
             res.status(404).json({ message: 'No USER found with this id' });
             return;
         }
-        //return the data
-        res.json(userData);
+        res.json(categoryData);
     })
     .catch(err => {
         console.log(err);
@@ -37,31 +32,27 @@ router.get('/:id', (req, res) => {
     });
 });
 
-//Create a new user
 router.post('/', (req, res) => {
-    User.create(req.body)
-    .then(userData => res.status(200).json(userData))
+    Category.create(req.body)
+    .then(categoryData => res.status(200).json(categoryData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
     });
 });
 
-//Update User Info
 router.put('/:id', (req, res) => {
-    User.update(req.body, {
-        where: {
+    Category.update(req.body, {
+        where:{
             id: req.params.id
         }
     })
-    .then(userData => {
-        if(!userData){
-            //if ID does not exist return this message
-            res.status(404).json({ message: 'No USER found with this id' });
+    .then(categoryData => {
+        if(!categoryData){
+            res.status(404).json({ message: 'No CATEGORIES found with this id'});
             return;
         }
-        //return the data
-        res.status(200).json(userData);
+        res.status(200).json(categoryData);
     })
     .catch(err => {
         console.log(err);
@@ -69,9 +60,8 @@ router.put('/:id', (req, res) => {
     });
 });
 
-//DEL user
 router.delete('/:id', (req, res) => {
-    User.destroy({
+    Category.destroy({
         where: {
             id: req.params.id
         }
