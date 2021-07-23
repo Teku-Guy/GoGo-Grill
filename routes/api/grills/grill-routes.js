@@ -74,13 +74,13 @@ router.post('/', (req, res) => {
     .then((grill)=>{
         //if there's feature tags then we need to create pairings to bulk crea in the FeatureTag model
         if(req.body.featureIds.length) {
-            const featureTagIdArr = req.body.featureIds.map((tag_id) => {
+            const featureIdArr = req.body.featureIds.map((tag_id) => {
                 return {
                     grill_id: grill.id,
                     tag_id
                 };
             });
-            return Feature.bulkCreate(featureTagIdArr);
+            return Feature.bulkCreate(featureIdArr);
         }
         //if no feature tags just respond
         res.status(200).json(grill);
@@ -98,13 +98,34 @@ router.put('/:id', (req, res) => {
             id: req.params.id
         }
     })
-    .then(grillData => {
-        if(!grillData){
-            res.status(404).json({ message: 'No GRILL found with this id'});
-            return;
-        }
-        res.json(grillData);
+    .then((grill) => {
+        //find all associated tags from Feature
+        return Feature.findAll({ where: {grill_id: req.params.id} });
     })
+    .then((grillData) => {
+        // get list of current tag_ids
+        const featureTagIds = grillData.map(({ tag_id }) => tag_id);
+        // create filtered list of new tag_ids
+        const newFeatures = req.body.featureIds
+        .filter((tag_id) => !featureTagIds.includes(tag_id))
+        .map((tag_id) => {
+            return {
+            grill_id: req.params.id,
+            tag_id,
+            };
+        });
+        // figure out which ones to remove
+        const featuresToRemove = grillData
+        .filter(({ tag_id }) => !req.body.featureIds.includes(tag_id))
+        .map(({ id }) => id);
+
+        // run both actions
+        return Promise.all([
+            Feature.destroy({ where: { id: featuresToRemove } }),
+            Feature.bulkCreate(newFeatures),
+        ]);
+    })
+    .then((updatedFeatures) => res.json(updatedFeatures))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
