@@ -1,23 +1,27 @@
 const router = require('express').Router();
-const { User, Grill, Brand, Category, Size, FeatureTag }  = require('../../models');
+const passport = require('passport');
+const { Sequelize } = require('sequelize');
+const { User, Grill, Brand, Category, Size, FeatureTag, Feature }  = require('../../models');
 
 //The `api/users/` endpoint
 
 //get all users
 router.get('/', (req, res) => {
     User.findAll({
+        exclude: ['password'],
         include: [
             {
                 model: Grill,
-                attributes: ['id', 'owner_id'],
+                as: 'Owned_Grills',
+                attributes: ['id', 'owner_id', 'createdAt',],
                 include: [
                     {
                         model: Brand,
-                        attributes: ['brand_name']
+                        attributes: [['brand_name', 'name']]
                     },
                     {
                         model: Category,
-                        attributes: ['category_name']
+                        attributes: [['category_name', 'type']]
                     },
                     {
                         model: Size,
@@ -25,7 +29,8 @@ router.get('/', (req, res) => {
                     },
                     {
                         model: FeatureTag,
-                        attributes: ['feature_name']
+                        attributes: [['feature_name', 'feature']],
+                        through: {attributes: []}
                     }
                 ]
             }
@@ -111,5 +116,32 @@ router.delete('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
+
+// router.post('/login', (req, res) => {
+//     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+//     User.findOne({
+//       where: {
+//         email: req.body.email
+//       }
+//     }).then(dbUserData => {
+//       if (!dbUserData) {
+//         res.status(400).json({ message: 'No user with that email address!' });
+//         return;
+//       }
+  
+//       const validPassword = dbUserData.checkPassword(req.body.password);
+  
+//       if (!validPassword) {
+//         res.status(400).json({ message: 'Incorrect password!' });
+//         return;
+//       }
+  
+//       res.json({ user: dbUserData, message: 'You are now logged in!' });
+//     });
+//   });
+
+// router.post('login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+
+// });
 
 module.exports = router;

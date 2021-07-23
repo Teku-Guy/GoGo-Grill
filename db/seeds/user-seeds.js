@@ -8,7 +8,6 @@ const userData = [
         last_name: 'user',
         age: '21',
         gender: 'male',
-        email: 'test@mail.com',
         password: 'test1',
         grill_id: '1'
     }

@@ -6,6 +6,7 @@ const seedCategories = require('./category-seeds');
 const seedFeatureTags = require('./feature-tag-seeds');
 const seedFeatures = require('./feature-seeds');
 const seedAppointments = require('./appointment-seeds');
+const seedSizes = require('./size-seeds');
 
 const sequelize = require('../../config/connection');
 
@@ -18,6 +19,8 @@ const seedAll = async () => {
     console.log('\n----- BRANDS SEEDED -----\n');
     await seedCategories();
     console.log('\n----- CATEGORIES SEEDED -----\n');
+    await seedSizes();
+    console.log('\n----- SIZES SEEDED -----\n');
     await seedGrills();
     console.log('\n----- GRILLS SEEDED -----\n');
     await seedFeatureTags();

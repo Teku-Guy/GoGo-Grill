@@ -9,11 +9,13 @@ const Appointment = require('./Appointment');
 
 //User can have multiple Griils
 Grill.belongsTo(User, {
+   as: 'Owner',
    foreignKey:'owner_id'
 });
 
 //Grills can belong to one User
 User.hasMany(Grill, {
+   as: 'Owned_Grills',
    foreignKey: 'owner_id'
 });
 

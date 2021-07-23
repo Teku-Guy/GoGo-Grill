@@ -1,12 +1,36 @@
 const router = require('express').Router();
-const { Grill, Category, Size, Brand, User, FeatureTag }  = require('../../../models');
+const { Grill, Category, Size, Brand, User, FeatureTag, Feature }  = require('../../../models');
 
 //The `api/grills/` endpoint
 
 //get all grills and related data
 router.get('/', (req, res) => {
     Grill.findAll({
-        include: [Brand, Category, Size, FeatureTag, User]
+        attributes: ['id'],
+        include: [
+            {
+               model: Brand,
+               attributes: [['brand_name', 'name']],
+            },
+            {
+                model: Category,
+                attributes: [['category_name', 'typ']],
+            },
+            {
+                model: Size,
+                attributes: ['dimensions']
+            },
+            {   
+                model: FeatureTag,
+                attributes: [['feature_name', 'feature']],
+                through: {attributes: []}
+            },
+            {
+                model: User,
+                as: 'Owner',
+                attributes: ['id','first_name','last_name']
+            }
+        ]
     })
     .then(grillData => res.json(grillData))
     .catch(err => {
@@ -36,10 +60,32 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+//create a new Grill
 router.post('/', (req, res) => {
+  /* req.body should look like this...
+    {
+      category_id: '3',
+      size_id: '2',
+      brand_id:'2',
+      owner_id: '1',
+      featureIds: [1, 2, 3, 4]
+  */
     Grill.create(req.body)
-    .then(grillData => res.status(200).json(grillData))
+    .then((grill)=>{
+        //if there's feature tags then we need to create pairings to bulk crea in the FeatureTag model
+        if(req.body.featureIds.length) {
+            const featureTagIdArr = req.body.featureIds.map((tag_id) => {
+                return {
+                    grill_id: grill.id,
+                    tag_id
+                };
+            });
+            return Feature.bulkCreate(featureTagIdArr);
+        }
+        //if no feature tags just respond
+        res.status(200).json(grill);
+    })
+    .then((featTagIds) => res.status(200).json(featTagIds))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);

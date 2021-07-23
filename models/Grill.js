@@ -33,7 +33,6 @@ Grill.init(
     },
     {
         sequelize,
-        timestamps: false,
     }
 );
 
