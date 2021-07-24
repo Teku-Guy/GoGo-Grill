@@ -67,6 +67,17 @@ router.get('/:id', (req, res) => {
 
 //Create a new user
 router.post('/', (req, res) => {
+    /* req.body should look like this...
+      {
+        first_name: "Gustavo",
+        last_name: "Muratalla",
+        age: "21",
+        gender: "male",
+        address: "123 Main St. Santa Barbara, CA 93111",
+        email: "gusmuratalla@gmail.com",
+        password: "password123"
+      }
+    */
     User.create(req.body)
     .then(userData => res.status(200).json(userData))
     .catch(err => {

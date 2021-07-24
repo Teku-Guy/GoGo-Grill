@@ -2,14 +2,13 @@ const { User } = require('../../models');
 
 const userData = [
     {
-        email: 'test@mail.com',
-        password:'test1',
-        first_name: 'test',
-        last_name: 'user',
-        age: '21',
-        gender: 'male',
-        password: 'test1',
-        grill_id: '1'
+        first_name: "Gustavo",
+        last_name: "Muratalla",
+        age: "21",
+        gender: "male",
+        address: "123 Main St. Santa Barbara, CA 93111",
+        email: "gusmuratalla@gmail.com",
+        password: "password123"
     }
 ]
 

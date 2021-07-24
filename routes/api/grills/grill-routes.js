@@ -140,7 +140,7 @@ router.delete('/:id', (req, res) => {
       })
         .then(userData => {
             if (!userData) {
-                res.status(404).json({ message: 'No USER found with this id' });
+                res.status(404).json({ message: 'No GRILL found with this id' });
                 return;
             }
             res.status(200).json(userData);
