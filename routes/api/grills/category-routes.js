@@ -23,6 +23,11 @@ router.get('/', (req, res) => {
                         model: FeatureTag,
                         attributes: [['feature_name', 'feature']],
                         through: {attributes: []}
+                    },
+                    {
+                        model: User,
+                        as: 'Owner',
+                        attributes: ['id','first_name','last_name']
                     }
                 ]
             }

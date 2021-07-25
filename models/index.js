@@ -59,6 +59,6 @@ Grill.belongsToMany(FeatureTag, {
 FeatureTag.belongsToMany(Grill, {
    through: Feature,
    foreignKey: 'tag_id'
-})
+});
 
 module.exports =  { User, Grill, Category, Brand, Feature, FeatureTag, Size, Appointment };
