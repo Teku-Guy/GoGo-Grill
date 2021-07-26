@@ -62,7 +62,30 @@ router.get('/:id', (req, res) => {
 });
 //create a new category
 router.post('/', (req, res) => {
+  /* req.body should look like this...
+    {
+      "category_name": "test",
+      "grillIds": [1, 2, 3, 4]
+    }
+  */
     Category.create(req.body)
+    .then((category) => {
+        //if there's grill ids then we need to create pairings to bulk create in the FeatureTag model
+        if(req.body.grillIds.length) {
+            const featureIdArr = req.body.grillIds.map((grill_id) => {
+                return {
+                    category_id: category.id,
+                    grill_id
+                };
+            });
+            return Grill.update({where:{
+                id: featureIdArr.grill_id,
+                category_id: category.id
+            }});
+        }
+        //if no feature tags just respond
+        res.status(200).json(category);
+    })
     .then(categoryData => res.status(200).json(categoryData))
     .catch(err => {
         console.log(err);

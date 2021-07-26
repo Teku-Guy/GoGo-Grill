@@ -89,7 +89,7 @@ router.post('/', (req, res) => {
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
-    })
+    });
 });
 
 router.put('/:id', (req, res) => {
@@ -138,12 +138,12 @@ router.delete('/:id', (req, res) => {
             id: req.params.id
         }
       })
-        .then(userData => {
-            if (!userData) {
+        .then(grillData => {
+            if (!grillData) {
                 res.status(404).json({ message: 'No GRILL found with this id' });
                 return;
             }
-            res.status(200).json(userData);
+            res.status(200).json(grillData);
         })
         .catch(err => {
             console.log(err);

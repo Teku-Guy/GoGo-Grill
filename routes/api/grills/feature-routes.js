@@ -158,6 +158,19 @@ router.put('/:id', (req, res) => {
 });
 
 //delete an existing features
-router.delete('/:id', (req, res) => {});
+router.delete('/:id', (req, res) => {
+    FeatureTag.destroy({where: { id: req.params.id }})
+    .then(featureData => {
+        if (!featureData) {
+            res.status(404).json({ message: 'No FEATURE found with this id' });
+            return;
+        }
+        res.status(200).json(featureData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
 module.exports = router;

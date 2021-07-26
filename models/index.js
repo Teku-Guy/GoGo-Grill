@@ -47,6 +47,14 @@ Brand.hasOne(Grill, {
    foreignKey: 'brand_id'
 });
 
+Appointment.belongsTo(User, {
+   as: "Client",
+   foreignKey: 'customer_id'
+});
+Appointment.belongsTo(Grill, {
+   foreignKey: 'grill_id'
+})
+
 /***** set up the one-to-many relationships between Grill and FeatureTag, and Feature and FeatureTag respectively *****/
 
 //Grill Can have many feature tags
