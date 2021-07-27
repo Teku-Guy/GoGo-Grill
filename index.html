@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GoGoGrill Technologies</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+/* Top Nav Bar with Logo */ 
+    <header>
+      <h1>GoGo Grill Logo</h1>
+
+      <nav>
+        <div class="topnav"></div>
+      </nav>
+    </header>
+/* hero image needs to be inserted */
+    <section class="hero"></section>
+/* form for authentication can be made into a modal*/
+    <section class="setUpAuth">
+      <h2>Log-In/Sign Up</h2>
+      <div>
+      <form>
+        <form action="/action_page.php">
+          <label for="usrName">Username:</label><br />
+          <input type="text" id="fname" name="fname" /><br />
+          <label for="password">Password:</label><br />
+          <input type="text" id="Username" name="Password" /><br /><br />
+          <input type="submit" value="Log In" />
+          <input type="submit" value="Sign Up" />
+        </form>
+    </div>
+
+        <p>
+          If you do not have a GoGoGrill account click the sign up button to register
+          **called "/action_page.php".**
+        </p>
+      </form>
+      <div>
+        <form>
+          <form action="/action_page.php">
+            <label for="fname">First Name:</label><br />
+            <input type="text" id="fname" name="fname" /><br />
+            <label for="lname">Last Name:</label><br />
+            <input type="text" id="lastname" name="lname" /><br /><br />
+            <input type="submit" value="Log In" />
+            <label for="fname">Date of Birth:</label><br />
+            <input type="text" id="dob" name="dob" /><br />
+            <label for="lname">Address:</label><br />
+            <input type="text" id="address" name="address" /><br /><br />
+            <input type="submit" value="Sign Up" />
+          </form>
+      </div>
+      <p>
+          You will now be redirectd to your homepage. If you are not immediately redirected click here.
+
+          /*link*\
+      </p>
+
+      /*side nav bar*/
+      <div class="sidenav">
+        <a href="profile">Profile</a>
+        <a href="calendar">Calendar</a>
+        <a href="#rates">Rates</a>
+        <a href="#contactUs">Contact Us</a>
+        <button class="dropdown-btn">Dropdown
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+        <a href="#contact">Search</a>
+      </div>
+
+      /* calendar needs to be made into modal or some sort of pop up */
+
+      <div class="month">
+        <ul>
+          <li class="prev">&#10094;</li>
+          <li class="next">&#10095;</li>
+          <li>August<br><span style="font-size:18px">2021</span></li>
+        </ul>
+      </div>
+      
+      <ul class="weekdays">
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+        <li>Su</li>
+      </ul>
+      
+      <ul class="days">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li><span class="active">10</span></li>
+        <li>11</li>
+        ...etc
+      </ul>
+
+    </section>
+  </body>
+</html>
