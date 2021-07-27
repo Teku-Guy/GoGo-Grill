@@ -2,7 +2,6 @@ const express = require('express');
 const routes = require('./routes');
 const sequelize = require('./config/connection');
 const passport = require('passport');
-const bodyParser = require('body-parser');
 const session = require('express-session');
 var exphbs  = require('express-handlebars');
 
@@ -21,11 +20,16 @@ app.set('view engine', 'handlebars');
 
 //passport middleware
 app.use(express.static("public"));
-app.use(session({ secret: "cats" }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(session({
+  secret: "cats",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 //expires cookie in one day
+  }
+}));
 
+//import our routes
 app.use(routes);
 
 // sync sequelize models to the database, then turn on the server
