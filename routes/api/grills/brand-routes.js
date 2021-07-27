@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Grill, Category, Size, Brand, User, FeatureTag, Feature  }  = require('../../../models');
+const { Grill, Category, Size, Brand, User, FeatureTag }  = require('../../../models');
 
 //The `api/grills/brands/` endpoint
 
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Grill,
-                attributes: ['id', 'owner_id', 'createdAt',],
+                attributes: ['id', 'owner_id', 'createdAt'],
                 include: [
                     {
                         model: Category,
@@ -90,7 +90,8 @@ router.post('/', (req, res) => {
 /* req.body should look like this...
     {
       brand_name: 'Example Brand'
-  */
+    }
+*/
     Brand.create(req.body)
     .then(brandData => res.status(200).json(brandData))
     .catch(err => {

@@ -41,6 +41,10 @@ router.get('/', (req, res) => {
 
 //get a single grill by id
 router.get('/:id', (req, res) => {
+    //checks if req.params.id is a valid number
+    if(isNaN(req.params.id)){
+        return res.status(500).json({message: 'Oops Wrong route'});
+    }
     Grill.findOne({
         where:{
             id: req.params.id
