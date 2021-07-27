@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Grill, Category, Size, Brand, User, FeatureTag, Feature  }  = require('../../../models');
 
-//The `api/brands/` endpoint
+//The `api/grills/brands/` endpoint
 
 //get all brands and related grill groups
 router.get('/', (req, res) => {
@@ -11,10 +11,6 @@ router.get('/', (req, res) => {
                 model: Grill,
                 attributes: ['id', 'owner_id', 'createdAt',],
                 include: [
-                    {
-                        model: Brand,
-                        attributes: [['brand_name', 'name']]
-                    },
                     {
                         model: Category,
                         attributes: [['category_name', 'type']]
@@ -32,10 +28,21 @@ router.get('/', (req, res) => {
             }
         ]
     })
+    .then(brandData => res.json(brandData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 //get brand by id
-router.get('/:id', (req, res) => {});
+router.get('/:id', (req, res) => {
+    Brand.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+});
 
 // create a new brand
 router.post('/', (req, res) => {});

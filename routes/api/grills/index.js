@@ -6,10 +6,10 @@ const featureRoutes = require('./feature-routes');
 const sizeRoutes = require('./size-routes');
 const brandRoutes = require('./brand-routes');
 
+router.use('/brands', brandRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/features', featureRoutes);
 router.use('/sizes', sizeRoutes);
-router.use('/brands', brandRoutes);
 router.use('/', grillRoutes);
 
 
