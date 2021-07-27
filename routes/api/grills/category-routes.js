@@ -20,14 +20,14 @@ router.get('/', (req, res) => {
                         attributes: ['dimensions']
                     },
                     {
+                        model: User,
+                        as: 'Owner',
+                        attributes: [['id', 'user_id'],'first_name','last_name']
+                    },
+                    {
                         model: FeatureTag,
                         attributes: [['feature_name', 'feature']],
                         through: {attributes: []}
-                    },
-                    {
-                        model: User,
-                        as: 'Owner',
-                        attributes: ['id','first_name','last_name']
                     }
                 ]
             }
@@ -45,7 +45,33 @@ router.get('/:id', (req, res) => {
     Category.findOne({
         where:{
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: Grill,
+                attributes: ['id', 'owner_id'],
+                include: [
+                    {
+                        model: Brand,
+                        attributes: [['brand_name', 'name']]
+                    },
+                    {
+                        model: Size,
+                        attributes: ['dimensions']
+                    },
+                    {
+                        model: User,
+                        as: 'Owner',
+                        attributes: [['id', 'user_id'],'first_name','last_name']
+                    },
+                    {
+                        model: FeatureTag,
+                        attributes: [['feature_name', 'feature']],
+                        through: {attributes: []}
+                    }
+                ]
+            }
+        ]
     })
     .then(categoryData => {
         if(!categoryData){

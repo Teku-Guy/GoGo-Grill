@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
                 through: {attributes: []},
                 include: [
                     {
-                    model: Brand,
-                    attributes: [['brand_name', 'name']],
+                        model: Brand,
+                        attributes: [['brand_name', 'name']],
                     },
                     {
                         model: Category,
@@ -53,8 +53,8 @@ router.get('/:id', (req, res) => {
                 through: {attributes: []},
                 include: [
                     {
-                    model: Brand,
-                    attributes: [['brand_name', 'name']],
+                        model: Brand,
+                        attributes: [['brand_name', 'name']],
                     },
                     {
                         model: Category,

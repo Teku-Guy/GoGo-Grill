@@ -26,22 +26,22 @@ router.get('/', (req, res) => {
                 model: Size,
                 attributes: ['dimensions']
             },
+            {
+                model: User,
+                as: 'Owner',
+                attributes: [['id', 'user_id'],'first_name','last_name']
+            },
             {   
                 model: FeatureTag,
                 attributes: [['feature_name', 'feature']],
                 through: {attributes: []}
-            },
-            {
-                model: User,
-                as: 'Owner',
-                attributes: ['id','first_name','last_name']
             }
           ]
         },
         {
           model: User,
           as: 'Client',
-          attributes: ['id', 'first_name', 'last_name', 'address', 'age']
+          attributes: [['id', 'user_id'], 'first_name', 'last_name', 'address', 'age']
         }
       ]
     })
@@ -76,15 +76,15 @@ router.get('/:id', (req, res) => {
               model: Size,
               attributes: ['dimensions']
           },
+          {
+              model: User,
+              as: 'Owner',
+              attributes: [['id', 'user_id'],'first_name','last_name']
+          },
           {   
               model: FeatureTag,
               attributes: [['feature_name', 'feature']],
               through: {attributes: []}
-          },
-          {
-              model: User,
-              as: 'Owner',
-              attributes: ['id','first_name','last_name']
           }
         ]
       },

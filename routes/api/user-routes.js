@@ -48,7 +48,34 @@ router.get('/:id', (req, res) => {
     User.findOne({
         where:{
             id: req.params.id
-        }
+        },
+        exclude: ['password'],
+        include: [
+            {
+                model: Grill,
+                as: 'Owned_Grills',
+                attributes: ['id', 'owner_id', 'createdAt',],
+                include: [
+                    {
+                        model: Brand,
+                        attributes: [['brand_name', 'name']]
+                    },
+                    {
+                        model: Category,
+                        attributes: [['category_name', 'type']]
+                    },
+                    {
+                        model: Size,
+                        attributes: ['dimensions']
+                    },
+                    {
+                        model: FeatureTag,
+                        attributes: [['feature_name', 'feature']],
+                        through: {attributes: []}
+                    }
+                ]
+            }
+        ]
     })
     .then(userData => {
         if(!userData){
