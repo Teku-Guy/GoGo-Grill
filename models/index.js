@@ -47,14 +47,6 @@ Brand.hasOne(Grill, {
    foreignKey: 'brand_id'
 });
 
-Appointment.belongsTo(User, {
-   as: "Client",
-   foreignKey: 'customer_id'
-});
-Appointment.belongsTo(Grill, {
-   foreignKey: 'grill_id'
-})
-
 /***** set up the one-to-many relationships between Grill and FeatureTag, and Feature and FeatureTag respectively *****/
 
 //Grill Can have many feature tags
@@ -68,5 +60,17 @@ FeatureTag.belongsToMany(Grill, {
    through: Feature,
    foreignKey: 'tag_id'
 });
+
+//appt relations
+Appointment.hasOne(Grill, {
+   foreignKey: 'grill_id'
+});
+
+Appointment.belongsTo(User, {
+   as: "Client",
+   foreignKey: 'customer_id'
+});
+
+
 
 module.exports =  { User, Grill, Category, Brand, Feature, FeatureTag, Size, Appointment };
