@@ -1,4 +1,4 @@
-const { Appointment } = require('../../models');
+const { Appointment } = require('../models');
 
 const appData = [
     {

@@ -1,4 +1,4 @@
-const { Grill } = require('../../models');
+const { Grill } = require('../models');
 
 const grillData = [
     {

@@ -1,4 +1,4 @@
-const { Size } = require('../../models');
+const { Size } = require('../models');
 
 const sizeData = [
     {

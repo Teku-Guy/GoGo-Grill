@@ -1,4 +1,4 @@
-const { FeatureTag } = require('../../models');
+const { FeatureTag } = require('../models');
 
 const tagData = [
     {

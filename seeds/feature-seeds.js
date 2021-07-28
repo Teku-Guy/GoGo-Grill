@@ -1,4 +1,4 @@
-const { Feature } = require('../../models');
+const { Feature } = require('../models');
 
 const featureData = [
     {
