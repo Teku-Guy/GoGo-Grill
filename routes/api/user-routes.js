@@ -1,14 +1,13 @@
 const router = require('express').Router();
-const passport = require('passport');
-const { Sequelize } = require('sequelize');
-const { User, Grill, Brand, Category, Size, FeatureTag, Feature }  = require('../../models');
+const passport = require("../../config/passport");
+const { User, Grill, Brand, Category, Size, FeatureTag }  = require('../../models');
 
 //The `api/users/` endpoint
 
 //get all users
 router.get('/', (req, res) => {
     User.findAll({
-        exclude: ['password'],
+        attributes: { exclude: ['password'] },
         include: [
             {
                 model: Grill,
@@ -49,7 +48,7 @@ router.get('/:id', (req, res) => {
         where:{
             id: req.params.id
         },
-        exclude: ['password'],
+        attributes: { exclude: ['password'] },
         include: [
             {
                 model: Grill,
@@ -93,7 +92,7 @@ router.get('/:id', (req, res) => {
 });
 
 //Create a new user
-router.post('/', (req, res) => {
+router.post('/signup', (req, res) => {
     /* req.body should look like this...
       {
         first_name: "Gustavo",
@@ -107,35 +106,29 @@ router.post('/', (req, res) => {
     */
     User.create(req.body)
     .then(userData => res.status(200).json(userData))
+    //.then(() => res.redirect(307, "/api/login")) redirect to our login route
     .catch(err => {
         console.log(err);
-        res.status(500).json(err);
+        res.status(401).json(err);
     });
 });
 
-router.post('/login', (req, res) => {
-    // expects {email: 'lernantino@gmail.com', password: 'password1234'}
-    User.findOne({
-      where: {
-        email: req.body.email
-      }
-    }).then(dbUserData => {
-      if (!dbUserData) {
-        res.status(400).json({ message: 'No user with that email address!' });
-        return;
-      }
-
-      //checkPassword
-      const validPassword = dbUserData.checkPassword(req.body.password);
-  
-      if (!validPassword) {
-        res.status(400).json({ message: 'Incorrect password!' });
-        return;
-      }
-  
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
+// Using the passport.authenticate middleware with our local strategy.
+// If the user has valid login credentials, send them to the members page.
+// Otherwise the user will be sent an error
+router.post("/login", passport.authenticate("local"), (req, res) => {
+// Sending back a password, even a hashed password, isn't a good idea
+// expects {email: 'lernantino@gmail.com', password: 'password1234'}
+    res.json({
+      email: req.user.email,
+      id: req.user.id,
+      message: 'You are now logged in!'
     });
-  });
+});
+
+// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
+// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
+// otherwise send back an error
 
 //Update User Info
 router.put('/:id', (req, res) => {

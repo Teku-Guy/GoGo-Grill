@@ -61,7 +61,7 @@ FeatureTag.belongsToMany(Grill, {
    foreignKey: 'tag_id'
 });
 
-//appt relations
+// appt relations
 Appointment.hasOne(Grill, {
    foreignKey: 'grill_id'
 });

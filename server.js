@@ -21,13 +21,15 @@ app.set('view engine', 'handlebars');
 //passport middleware
 app.use(express.static("public"));
 app.use(session({
-  secret: "cats",
-  resave: false,
+  secret: "keyboard cat",
+  resave: true,
   saveUninitialized: true,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 //expires cookie in one day
   }
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //import our routes
 app.use(routes);
