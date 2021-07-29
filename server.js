@@ -14,10 +14,6 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//handlebars middleware
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-
 //passport middleware
 app.use(express.static("public"));
 app.use(session({
@@ -30,6 +26,10 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+//handlebars middleware
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 //import our routes
 app.use(routes);
