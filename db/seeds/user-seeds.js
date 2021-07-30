@@ -4,11 +4,11 @@ const userData = [
     {
         first_name: "Gustavo",
         last_name: "Muratalla",
-        age: "21",
+        email: "gusmuratalla@gmail.com",
+        password: "password123",
+        birthday: "07/22/2000",
         gender: "male",
         address: "123 Main St. Santa Barbara, CA 93111",
-        email: "gusmuratalla@gmail.com",
-        password: "password123"
     }
 ]
 

@@ -15,7 +15,9 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/profile', isAuthenticated, (req, res) => {
-    res.render('profile')
+    res.render('profile', {
+      logged_in: req.session.logged_in
+    })
 })
 
 //returns 404 page if route not found

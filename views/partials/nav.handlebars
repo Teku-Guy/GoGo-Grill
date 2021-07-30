@@ -8,9 +8,15 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
+                {{#if logged_in}}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#" id="logout">Log out</a>
+                </li>
+                {{else}}
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/login">Log in | Sign up</a>
                 </li>
+                {{/if}}
                 {{!-- <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                 </li> --}}

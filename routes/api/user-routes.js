@@ -116,20 +116,34 @@ router.post('/signup', (req, res) => {
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
 // Otherwise the user will be sent an error
-router.post("/login", passport.authenticate("local"), (req, res) => {
+router.post("/login", passport.authenticate("local"), async (req, res) => {
 // Sending back a password, even a hashed password, isn't a good idea
 // expects {email: 'lernantino@gmail.com', password: 'password1234'}
-    res.json({
-      email: req.user.email,
-      id: req.user.id,
-      message: 'You are now logged in!'
-    });
+    try{
+        req.session.save(() => {
+            req.session.user_id = req.user.id;
+            req.session.logged_in = true;
+            
+            res.json({
+                email: req.user.email,
+                id: req.user.id,
+                message: 'You are now logged in!'
+            });
+        });
+    } catch(err){
+        res.status(400).json(err);
+    }
 });
 
 // Route for logging user out
-router.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
+router.post("/logout", (req, res) => {
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+          res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
 });
 
 //Update User Info
