@@ -50,11 +50,11 @@
             </form>
         </div>
 
-        {{#if Appointments.length}}
+        {{#if appointments.length}}
         <div class="col-md-6 project-list">
           <h3>Current Appointments:</h3>
 
-          {{#each Appointments as |appointment|}}
+          {{#each appointments as |appointment|}}
           <div class="row mb-2">
             <div class="col-md-8">
               <h4><a href="/project/{{appointment.id}}">{{appointment.customer_id}}</a></h4>
