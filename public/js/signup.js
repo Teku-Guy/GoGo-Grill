@@ -64,6 +64,7 @@ const statesArray =[
 ]
 
 $(document).ready(() => {
+    loadStates();
 
     signUpForm.on('submit', event => {
         event.preventDefault();
@@ -79,8 +80,6 @@ $(document).ready(() => {
 
         signupUser(userData);
     });
-    
-    loadStates();
 });
 
 function getaddress() {
@@ -95,7 +94,7 @@ function getaddress() {
 
 function signupUser(data) {
     $.post('/api/users/signup', data)
-      .then(() => window.location.replace('/profile'))
+      .then(() => window.location.replace('/login'))
       .catch(err => {
           alert("missing info");
           console.log(err);

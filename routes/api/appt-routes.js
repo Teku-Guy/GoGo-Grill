@@ -38,11 +38,11 @@ router.get('/', (req, res) => {
             }
           ]
         },
-        {
-          model: User,
-          as: 'Client',
-          attributes: [['id', 'user_id'], 'first_name', 'last_name', 'address', 'age']
-        }
+        // {
+        //   // model: User,
+        //   // as: 'Client',
+        //   // attributes: [['id', 'user_id'], 'first_name', 'last_name', 'address', 'age']
+        // }
       ]
     })
     .then(apptData => res.json(apptData))

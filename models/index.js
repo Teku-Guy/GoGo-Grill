@@ -71,6 +71,8 @@ Appointment.belongsTo(User, {
    foreignKey: 'customer_id'
 });
 
-
+User.hasMany(Appointment, {
+   foreignKey: 'customer_id'
+})
 
 module.exports =  { User, Grill, Category, Brand, Feature, FeatureTag, Size, Appointment };
