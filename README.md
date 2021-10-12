@@ -9,6 +9,10 @@ Go-Go Grill is a full stack application that allows users to book grills through
 
 For technical support you can forward any issues to gogogrillapp@gmail.com
 
+or
+
+open a [github issue](https://github.com/Teku-Guy/GoGo-Grill/issues) request.
+
 #### Contributing 
 
 The tools necessary to work on this project are 
